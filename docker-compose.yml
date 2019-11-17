@@ -2,7 +2,7 @@ version: "3"
 
 services:
   quake3:
-    build: .
+    image: dmpanch/q3-server:1.0.0
     restart: always
     ports:
      - 27960:27960/udp
@@ -11,14 +11,13 @@ services:
      - ./logs/games.log:/home/ioq3srv/.q3a/osp/games.log
 
   ng-quake3-be:
+    image: dmpanch/q3-server-docker-rest-api:1.0.0
     environment:
        - Q3SERV_HOST:quake3
-       
-    build: ./ng-quake3-be/
     restart: always
 
   ng-quake3-fe:
+    image: dmpanch/q3-server-angular-web-ui:1.0.0
     restart: always
-    build: ./ng-quake3-fe/
     ports:
      - 8080:8080
